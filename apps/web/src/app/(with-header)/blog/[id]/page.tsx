@@ -3,7 +3,7 @@ import ButtonAction from "../../../../components/buttonaction"
 
 const BlogDetailPage = async({ params }: { params: { id: string } }) => {
 
-    const blog=await db.blogs.findUnique({
+    const blog=await db.blogs.findFirst({
         select:{
             id:true,
             blogDescription:true,

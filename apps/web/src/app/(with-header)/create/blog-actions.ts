@@ -21,7 +21,7 @@ export const createBlogs=async(values:IBlogs)=>{
       }
       const user=await db.user.findFirst({
         where:{
-          email:session?.user.email ?? ""
+          email:session?.user.email || ""
         }
       })
     const {blogTitle,blogDescription}=values;
@@ -31,8 +31,7 @@ export const createBlogs=async(values:IBlogs)=>{
         blogDescription:z.string().min(1)
     })
 
-    const isValidData=FormData.parse({
-        
+    const isValidData=FormData.parse({        
         blogDescription,
         blogTitle
     })

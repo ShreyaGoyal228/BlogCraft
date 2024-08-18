@@ -5,14 +5,14 @@ import { redirect } from 'next/navigation'
 import { getServerSession } from "next-auth";
 export default async function Home() {
   const session =await getServerSession();
-
+console.log("sessssssion is",session);
   const user=await db.user.findFirst({
     where:{
       email:session?.user.email || ""
     }
   })
 console.log("session after user logged in is",user?.id)
-  if(!user?.email)
+  if(!session)
     { redirect("/auth/login");
     }
 const blogs=await db.blogs.findMany({

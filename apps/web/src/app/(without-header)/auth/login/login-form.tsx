@@ -16,7 +16,15 @@ const formSchema = z.object({
     .min(8,'Password must have 8 characters'),
    
 })
-
+const handleGoggleSignin=async()=>{
+    await signIn('google')
+    .then((resp)=>{
+       console.log("response is",resp)
+    })
+    .catch((err)=>{
+console.log(err);
+    })
+}
 const LoginForm=()=>{
     const router=useRouter();
     const onSubmit = async(values: z.infer<typeof formSchema>) => {
@@ -89,6 +97,7 @@ const LoginForm=()=>{
                     </div>
                     
                     <Button type="submit" className="w-full mt-4 ">Login</Button>
+                    {/* <Button type="button" onClick={handleGoggleSignin} className="w-full mt-4 ">Sign in with google</Button> */}
 
                     <p className='mt-2 text-center'>{`Don't have an account?`}<Link href="/auth/register" className="text-blue-500 ">SignUp</Link></p>
                 </form>

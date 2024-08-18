@@ -1,4 +1,6 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import GoogleProvider from "next-auth/providers/google";
+
 import {
   getServerSession,
   type DefaultSession,
@@ -72,11 +74,15 @@ if(!existingUser)
   return null;
 
   // const passwordMatch=existingUser.passwordHash===credentials.password
-  const passwordMatch= await compare(credentials.password,existingUser.passwordHash)
-  // console.log("credentials.password",credentials.password)
-  // console.log("passwordMatch",passwordMatch)
+  if(existingUser.passwordHash)
+  {
+  const passwordMatch= await compare(credentials.password,existingUser?.passwordHash)
   if(!passwordMatch)
     return null;
+  }
+  // console.log("credentials.password",credentials.password)
+  // console.log("passwordMatch",passwordMatch)
+ 
 
   return{
     id:existingUser.id,
@@ -84,6 +90,41 @@ if(!existingUser)
     username:existingUser.name
   }
       }
+    }),
+    GoogleProvider({
+      // profile(profile) {
+      //   console.log('Profile Google: ', profile)
+    
+      //   return {
+      //     ...profile,
+      //     role: 'client'
+         
+      //   }
+      // },
+      name:"google",
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code"
+        }
+      },
+    profile(profile, tokens) {
+      console.log("profile is",profile);
+      return {
+        // before:    
+        // id: tokens.id_token
+        // after:
+        id: tokens.id_token || profile.id,
+        name: profile.name,
+        email: profile.email,
+    
+       // ...
+      };
+    },
+     
     })
     /**
      * ...add more providers here.
