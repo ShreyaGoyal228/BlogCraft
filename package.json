@@ -2,7 +2,7 @@
   "name": "personal-blog",
   "private": true,
   "scripts": {
-    "postinstall": "cd packgaes/database && prisma generate",
+    "postinstall": "cd packages/database && pnpx prisma generate",
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
