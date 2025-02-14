@@ -2,8 +2,8 @@
   "name": "personal-blog",
   "private": true,
   "scripts": {
-    "postinstall": "cd packages/database && pnpx prisma generate",
-    "build": "cd packages/database && pnpx prisma generate && pnpx prisma migrate deploy && turbo build",
+    "postinstall": "cd packages/database && pnpx prisma generate && pnpx prisma db push",
+    "build": "cd packages/database && pnpx prisma generate && pnpx prisma db push",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
