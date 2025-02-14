@@ -1,8 +1,8 @@
 {
-  "name": "database",
+  "name": "@repo/database",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "db:migrate:dev": "npx prisma migrate dev",
     "db:migrate:deploy": "npx prisma migrate deploy",
