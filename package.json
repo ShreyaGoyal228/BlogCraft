@@ -1,9 +1,12 @@
 {
   "name": "personal-blog",
   "private": true,
+  "prisma": {
+    "schema": "./packages/database/prisma/schema.prisma"
+  },
   "scripts": {
-    "postinstall": "cd packages/database && pnpx prisma generate && pnpx prisma db push",
-    "build": "cd packages/database && pnpx prisma generate && pnpx prisma db push",
+    "postinstall": "cd packages/database && cd prisma && pnpx prisma generate && pnpx prisma db push",
+    "build": "turbo",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
