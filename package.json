@@ -5,11 +5,13 @@
     "schema": "./packages/database/prisma/schema.prisma"
   },
   "scripts": {
-    "postinstall": "cd packages/database && pnpx prisma generate && pnpx prisma db push",
-    "build": "cd packages/database && pnpx prisma generate && pnpx prisma db push",
+    "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "database:migration:dev": "cd packages/database && pnpx prisma migrate dev",
+    "database:format": "cd packages/database && npx prisma format",
+    "database:migration:prod": "cd packages/database && pnpm prisma db push && pnpm prisma generate"
   },
   "devDependencies": {
     "prettier": "^3.2.5",
